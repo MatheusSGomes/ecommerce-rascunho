@@ -13,9 +13,5 @@ public class Usuario
     public DateTimeOffset DataCadastro { get; set; }
     public Contato? Contato { get; set; }
     public ICollection<EnderecoEntrega>? EnderecosEntrega { get; set; }
-    
-    /*
-     * TODO: Vincular com as classes:
-     * - Departamento
-     */
+    public ICollection<Departamento> Departamentos { get; set; }
 }
