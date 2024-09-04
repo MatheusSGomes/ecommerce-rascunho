@@ -47,5 +47,12 @@ namespace eCommerce.API.Controllers
             _repository.Update(usuario);
             return Ok(usuario);
         }
+
+        [HttpDelete("{id")]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            _repository.Delete(id);
+            return Ok();
+        }
     }
 }
