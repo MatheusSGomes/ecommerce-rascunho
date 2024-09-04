@@ -40,5 +40,12 @@ namespace eCommerce.API.Controllers
             _repository.Add(usuario);
             return Ok(usuario);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult Update([FromBody] Usuario usuario, [FromRoute] int id)
+        {
+            _repository.Update(usuario);
+            return Ok(usuario);
+        }
     }
 }
