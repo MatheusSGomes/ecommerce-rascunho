@@ -21,5 +21,16 @@ namespace eCommerce.API.Controllers
             var listaUsuarios = _repository.Get();
             return Ok(listaUsuarios);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult Get([FromRoute] int id)
+        {
+            var usuario = _repository.Get(id);
+
+            if (usuario == null)
+                return NotFound("Usuário não encontrado");
+
+            return Ok(usuario);
+        }
     }
 }
