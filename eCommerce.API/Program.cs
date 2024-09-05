@@ -1,3 +1,5 @@
+global using eCommerce.Models;
+
 using eCommerce.API.Database;
 using eCommerce.API.Repositories;
 using Microsoft.EntityFrameworkCore;
