@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,14 +13,19 @@ public class Usuario
     public int Id { get; set; }
     public string Nome { get; set; } = null!;
     public string Email { get; set; } = null!;
+    
+    [Required]
+    [MaxLength(15)]
     public string? Sexo { get; set; }
+
     [Column("registro_geral")]
     public string? RG { get; set; }
     public string CPF { get; set; } = null!;
     public string? NomeMae { get; set; }
     public string? SituacaoCadastro { get; set; }
     
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Matricula { get; set; }
     
     /*

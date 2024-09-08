@@ -21,7 +21,7 @@ public class Pedido
     [ForeignKey("Supervisor")]
     public int SupervisorId { get; set; }
 
-    public Usuario? Usuario { get; set; }
+    public Usuario? Cliente { get; set; }
     public Usuario? Colaborador { get; set; }
     public Usuario? Supervisor { get; set; }
 }
