@@ -1,3 +1,4 @@
+using eCommerce.Models.FluentAPI.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace eCommerce.Models.FluentAPI;
@@ -14,6 +15,9 @@ public class eCommerceFluentContext: DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
+        
+        #region Explicações Capítulo 07
         modelBuilder.Entity<Usuario>().ToTable("TB_USUARIOS");
         modelBuilder.Entity<Usuario>()
             .Property(property => property.RG)
@@ -53,7 +57,8 @@ public class eCommerceFluentContext: DbContext
         modelBuilder.Entity<Usuario>()
             .HasOne(usuario => usuario.Contato)
             .WithOne(contato => contato.Usuario)
-            .HasForeignKey<Contato>(contato => contato.UsuarioId);
+            .HasForeignKey<Contato>(contato => contato.UsuarioId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Usuario>()
             .HasMany(usuario => usuario.EnderecosEntrega)
@@ -63,5 +68,18 @@ public class eCommerceFluentContext: DbContext
         modelBuilder.Entity<Usuario>()
             .HasMany(usuario => usuario.Departamentos)
             .WithMany(departamentos => departamentos.Usuarios);
+
+        modelBuilder.Entity<Usuario>().Property(usuario => usuario.RG).IsRequired().HasMaxLength(15);
+        #endregion
+
+        #region Usuario
+        modelBuilder.Entity<Usuario>().ToTable("tb_usuarios");
+        // ...
+        #endregion
+
+        #region Contato
+        modelBuilder.Entity<Usuario>().ToTable("tb_contatos");
+        // ...
+        #endregion
     }
 }
