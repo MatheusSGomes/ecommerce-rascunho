@@ -1,4 +1,5 @@
 ﻿using eCommerce.Office;
+using eCommerce.Office.Models;
 using Microsoft.EntityFrameworkCore;
 
 var db = new eCommerceOfficeContext();
@@ -19,4 +20,20 @@ foreach (var setor in resultado)
         Console.WriteLine(" - " + colaboradorSetor.Colaborador.Nome);
     }
 }
+#endregion
+
+#region Many-To-Many - Com EF Core 5+
+
+var resultadoTurma = db.Colaboradores!.Include(colaborador => colaborador.Turmas);
+
+foreach (var colaborador in resultadoTurma)
+{
+    Console.WriteLine(colaborador.Nome);
+
+    foreach (var turma in colaborador.Turmas)
+    {
+        Console.WriteLine("- " + turma.Nome);
+    }
+}
+
 #endregion

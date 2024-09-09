@@ -19,7 +19,7 @@ public class eCommerceOfficeContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        #region Many-To-Many com 2 relacionamentos One-To-Many
+        #region Mapping: ColaboradorSetor - Many-To-Many com 2 relacionamentos One-To-Many
 
         modelBuilder.Entity<ColaboradorSetor>()
             .HasKey(colaboradorSetor => new { colaboradorSetor.ColaboradorId, colaboradorSetor.SetorId });
@@ -72,6 +72,21 @@ public class eCommerceOfficeContext : DbContext
                 new ColaboradorSetor { SetorId = 3, ColaboradorId = 5, DataRegistroCriado = DateTimeOffset.Now },
                 new ColaboradorSetor { SetorId = 3, ColaboradorId = 6, DataRegistroCriado = DateTimeOffset.Now });
 
+        #endregion
+
+        #region Mapping: Colaborador <=> Turma
+
+        modelBuilder.Entity<Colaborador>()
+            .HasMany(colaborador => colaborador.Turmas)
+            .WithMany(turma => turma.Colaboradores);
+
+        modelBuilder.Entity<Turma>().HasData(
+            new Turma { Id = 1, Nome = "Turma A1"},
+            new Turma { Id = 2, Nome = "Turma A2"},
+            new Turma { Id = 3, Nome = "Turma A3"},
+            new Turma { Id = 4, Nome = "Turma A4"},
+            new Turma { Id = 5, Nome = "Turma A5"});
+        
         #endregion
     }
 }
