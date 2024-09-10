@@ -31,6 +31,30 @@ public class UsuarioRepository : IUsuarioRepository
 
     public void Add(Usuario usuario)
     {
+        CriarVinculoDoUsuarioComDepartamento(usuario);
+
+        _db.Add(usuario);
+        _db.SaveChanges();
+    }
+
+    public void Update(Usuario usuario)
+    {
+        ExcluirVinculoDoUsuarioComDepartamento(usuario);
+        CriarVinculoDoUsuarioComDepartamento(usuario);
+
+        _db.Update(usuario);
+        _db.SaveChanges();
+    }
+    
+    public void Delete(int id)
+    {
+        var usuario = Get(id);
+        _db.Remove(usuario);
+        _db.SaveChanges();
+    }
+
+    private void CriarVinculoDoUsuarioComDepartamento(Usuario usuario)
+    {
         if (usuario.Departamentos != null)
         {
             var departamentos = usuario.Departamentos;
@@ -50,21 +74,20 @@ public class UsuarioRepository : IUsuarioRepository
                 }
             }
         }
-
-        _db.Add(usuario);
-        _db.SaveChanges();
     }
 
-    public void Update(Usuario usuario)
+    private void ExcluirVinculoDoUsuarioComDepartamento(Usuario usuario)
     {
-        _db.Update(usuario);
-        _db.SaveChanges();
-    }
+        var usuarioDoBanco = _db.Usuarios
+            .Include(usr => usr.Departamentos)
+            .FirstOrDefault(usr => usr.Id == usuario.Id);
 
-    public void Delete(int id)
-    {
-        var usuario = Get(id);
-        _db.Remove(usuario);
+        foreach (var departamento in usuarioDoBanco!.Departamentos!)
+        {
+            usuarioDoBanco.Departamentos.Remove(departamento);
+        }
+
         _db.SaveChanges();
+        _db.ChangeTracker.Clear();
     }
 }
