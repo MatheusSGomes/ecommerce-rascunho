@@ -72,6 +72,21 @@ public class eCommerceOfficeContext : DbContext
                 new ColaboradorSetor { SetorId = 3, ColaboradorId = 5, DataRegistroCriado = DateTimeOffset.Now },
                 new ColaboradorSetor { SetorId = 3, ColaboradorId = 6, DataRegistroCriado = DateTimeOffset.Now });
 
+        modelBuilder.Entity<Turma>().HasData(
+            new Turma { Id = 1, Nome = "Turma A1"},
+            new Turma { Id = 2, Nome = "Turma A2"},
+            new Turma { Id = 3, Nome = "Turma A3"},
+            new Turma { Id = 4, Nome = "Turma A4"},
+            new Turma { Id = 5, Nome = "Turma A5"});
+
+        modelBuilder.Entity<Veiculo>()
+            .HasData(
+                new Veiculo { Id = 1, Nome = "Fiat - Argo", Placa = "ABC-1111" },
+                new Veiculo { Id = 2, Nome = "Fiat - Mobi", Placa = "ABC-2222" },
+                new Veiculo { Id = 3, Nome = "Fiat - Sienna", Placa = "ABC-3333" },
+                new Veiculo { Id = 4, Nome = "Fiat - Idea", Placa = "ABC-4444" },
+                new Veiculo { Id = 5, Nome = "Fiat - Toro", Placa = "ABC-5555" });
+
         #endregion
 
         #region Mapping: Colaborador <=> Turma
@@ -80,13 +95,18 @@ public class eCommerceOfficeContext : DbContext
             .HasMany(colaborador => colaborador.Turmas)
             .WithMany(turma => turma.Colaboradores);
 
-        modelBuilder.Entity<Turma>().HasData(
-            new Turma { Id = 1, Nome = "Turma A1"},
-            new Turma { Id = 2, Nome = "Turma A2"},
-            new Turma { Id = 3, Nome = "Turma A3"},
-            new Turma { Id = 4, Nome = "Turma A4"},
-            new Turma { Id = 5, Nome = "Turma A5"});
-        
+        #endregion
+
+        #region Mapping: Colaborador <=> Veiculo (EF Core 5+)
+
+        modelBuilder.Entity<Colaborador>()
+            .HasMany(colaborador => colaborador.Veiculos)
+            .WithMany(veiculo => veiculo.Colaboradores)
+            .UsingEntity<ColaboradorVeiculo>(
+                colaboradorVeiculo => colaboradorVeiculo.HasOne(colaboradorVeiculo => colaboradorVeiculo.Veiculo).WithMany(veiculo => veiculo.ColaboradorVeiculos).HasForeignKey(colaboradorVeiculo => colaboradorVeiculo.VeiculoId),
+                colaboradorVeiculo => colaboradorVeiculo.HasOne(colaboradorVeiculo => colaboradorVeiculo.Colaborador).WithMany(colaborador => colaborador.ColaboradoresVeiculos).HasForeignKey(colaboradorVeiculo => colaboradorVeiculo.VeiculoId),
+                colaboradorVeiculo => colaboradorVeiculo.HasKey(a => new { a.ColaboradorId, a.VeiculoId}));
+
         #endregion
     }
 }

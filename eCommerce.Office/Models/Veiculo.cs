@@ -7,4 +7,5 @@ public class Veiculo
     public string Placa { get; set; } = null!;
 
     public ICollection<Colaborador> Colaboradores { get; set; }
+    public ICollection<ColaboradorVeiculo> ColaboradorVeiculos { get; set; }
 }

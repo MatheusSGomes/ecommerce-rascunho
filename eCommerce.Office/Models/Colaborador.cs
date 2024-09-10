@@ -8,5 +8,7 @@ public class Colaborador
     public ICollection<ColaboradorSetor>? ColaboradorSetores { get; set; }
 
     public ICollection<Veiculo>? Veiculos { get; set; }
+    public ICollection<ColaboradorVeiculo>? ColaboradoresVeiculos { get; set; }
+
     public ICollection<Turma>? Turmas { get; set; }
 }
