@@ -31,6 +31,26 @@ public class UsuarioRepository : IUsuarioRepository
 
     public void Add(Usuario usuario)
     {
+        if (usuario.Departamentos != null)
+        {
+            var departamentos = usuario.Departamentos;
+            usuario.Departamentos = new List<Departamento>(); // limpa a lista
+
+            foreach (var departamento in departamentos)
+            {
+                if (departamento.Id > 0)
+                {
+                    // Add Refência registro do banco.
+                    usuario.Departamentos.Add(_db.Departamentos.Find(departamento.Id));
+                }
+                else
+                {
+                    // Add novo registro. Referência não existe no SGBD.
+                    usuario.Departamentos.Add(departamento);
+                }
+            }
+        }
+
         _db.Add(usuario);
         _db.SaveChanges();
     }
