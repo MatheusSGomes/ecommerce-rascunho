@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerce.Office;
 
@@ -11,9 +12,11 @@ using eCommerce.Office;
 namespace eCommerce.Office.Migrations
 {
     [DbContext(typeof(eCommerceOfficeContext))]
-    partial class eCommerceOfficeContextModelSnapshot : ModelSnapshot
+    [Migration("20240910003254_AddVeiculoSeeds")]
+    partial class AddVeiculoSeeds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
