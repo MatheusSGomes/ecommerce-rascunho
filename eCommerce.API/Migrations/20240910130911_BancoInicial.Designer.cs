@@ -12,7 +12,7 @@ using eCommerce.API.Database;
 namespace eCommerce.API.Migrations
 {
     [DbContext(typeof(eCommerceContext))]
-    [Migration("20240905213203_BancoInicial")]
+    [Migration("20240910130911_BancoInicial")]
     partial class BancoInicial
     {
         /// <inheritdoc />
@@ -80,6 +80,43 @@ namespace eCommerce.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Departamentos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nome = "Moda"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nome = "Informática"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Nome = "Eletrodomésticos"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Nome = "Eletroportáteis"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Nome = "Mercado"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Nome = "Beleza"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Nome = "Móveis"
+                        });
                 });
 
             modelBuilder.Entity("eCommerce.Models.EnderecoEntrega", b =>
