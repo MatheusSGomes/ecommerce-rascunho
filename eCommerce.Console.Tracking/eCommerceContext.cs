@@ -9,9 +9,9 @@ public class eCommerceContext : DbContext
     {
         optionsBuilder
             .UseSqlServer("Server=localhost,1433;Database=ecommerce;User ID=sa;Password=1q2w3e4r@#$;Encrypt=False;")
-            .LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information)
+            /*.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information)
             .EnableSensitiveDataLogging()
-            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)*/;
     }
 
     public DbSet<Usuario> Usuarios { get; set; }
