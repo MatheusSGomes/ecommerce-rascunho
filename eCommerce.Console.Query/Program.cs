@@ -1,1 +1,74 @@
-﻿
+﻿using eCommerce.API.Database;
+using Microsoft.EntityFrameworkCore;
+
+var db = new eCommerceContext();
+
+// var usuarios = db.Usuarios!.ToList();
+
+// foreach (var usuario in usuarios)
+// {
+//     Console.WriteLine($"- {usuario.Nome}");
+// }
+
+// var usuario01 = db.Usuarios!.Find(2);
+// Console.WriteLine($"- {usuario01.Nome}");
+
+
+// var usuario2 = db.Usuarios!.Where(a => a.Email == "jose@gmail.com").First();
+// Console.WriteLine($"- {usuario2.Nome}");
+
+// var usuario3 = db.Usuarios!.OrderBy(a => a.Nome).LastOrDefault();
+
+// var usuario01 = db.Usuarios!.FirstOrDefault(a => a.Email == "jose@gmail.com");
+// var usuario01 = db.Usuarios!.SingleOrDefault(a => a.Nome.Contains("a"));
+// Console.WriteLine($"Código: {usuario01.Id} - Nome: {usuario01.Nome}");
+
+// var countUsuariosLetraA = db.Usuarios!.Where(a => a.Nome.Contains("a")).Count();
+// Console.WriteLine($"Registros com letra 'a': {countUsuariosLetraA}");
+
+
+// var max = db.Usuarios!.Max(a => a.Id);
+// Console.WriteLine($"Id máximo {max}");
+
+// var min = db.Usuarios!.Min(a => a.Id);
+// Console.WriteLine($"Id mínimo {min}");
+
+
+/* Include */
+// var usuarios = db.Usuarios!
+//     .Include(a => a.Contato)
+//     .Include(a => a.EnderecosEntrega.Where(e => e.Estado == "SP"))
+//     .ToList();
+//
+// foreach (var usuario in usuarios)
+// {
+//     Console.WriteLine($"- {usuario.Nome} - {usuario.Contato!.Celular} - QTD. de endereços: {usuario.EnderecosEntrega!.Count}");
+//
+//     foreach (var endereco in usuario.EnderecosEntrega)
+//     {
+//         Console.WriteLine($"-- {endereco.NomeEndereco} - {endereco.CEP} - {endereco.Cidade}");
+//     }
+// }
+
+/* ThenInclude */
+// var contatos = db.Contatos!
+//     .Include(contato => contato.Usuario)
+//     .ThenInclude(usuario => usuario!.EnderecosEntrega)
+//     .Include(enderecoEntrega => enderecoEntrega.Usuario)
+//     .ThenInclude(usuario => usuario!.Departamentos)
+//     .ToList();
+//
+// foreach (var contato in contatos)
+// {
+//     Console.WriteLine(@$"- {contato.Telefone} -> {contato.Usuario!.Nome} 
+//                          - Qtd. Enderecos: {contato.Usuario.EnderecosEntrega!.Count}
+//                          - Qtd. Departamentos: {contato.Usuario.Departamentos}");
+// }
+
+/* Autoinclude */
+var usuarios = db.Usuarios!.IgnoreAutoIncludes().ToList();
+
+foreach (var usuario in usuarios)
+{
+    Console.WriteLine($"Nome: {usuario.Nome} - Telefone: {usuario.Contato?.Telefone}");
+}

@@ -15,4 +15,9 @@ public class eCommerceContext : DbContext
     public DbSet<Contato>? Contatos { get; set; }
     public DbSet<EnderecoEntrega>? EnderecosEntrega { get; set; }
     public DbSet<Departamento>? Departamentos { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Usuario>().Navigation(a => a.Contato).AutoInclude();
+    }
 }
