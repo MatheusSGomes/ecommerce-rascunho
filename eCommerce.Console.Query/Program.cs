@@ -146,3 +146,7 @@ var db = new eCommerceContext();
 // {
 //     Console.WriteLine($"({usuario.Id}) {usuario.Nome}");
 // }
+
+/* Executa Sql Raw - com retorno */
+var mae = "Josefina Silva";
+db.Database.ExecuteSqlInterpolated($"UPDATE [Usuarios] SET [NomeMae] = {mae} WHERE Id = 2");
