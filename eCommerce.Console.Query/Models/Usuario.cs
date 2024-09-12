@@ -1,7 +1,17 @@
+using Microsoft.EntityFrameworkCore.Infrastructure;
+
 namespace eCommerce.Models;
 
 public class Usuario
 {
+    private readonly ILazyLoader LazyLoader;
+    public Usuario() { }
+
+    public Usuario(ILazyLoader lazyLoader)
+    {
+        LazyLoader = lazyLoader;
+    }
+
     public int Id { get; set; }
     public string Nome { get; set; } = null!;
     public string Email { get; set; } = null!;
@@ -12,6 +22,12 @@ public class Usuario
     public string? SituacaoCadastro { get; set; }
     public DateTimeOffset DataCadastro { get; set; }
     public Contato? Contato { get; set; }
-    public ICollection<EnderecoEntrega>? EnderecosEntrega { get; set; }
+    private ICollection<EnderecoEntrega>? _enderecosEntrega;
+
+    public ICollection<EnderecoEntrega>? EnderecosEntrega
+    {
+        get => LazyLoader.Load(this, ref _enderecosEntrega);
+        set => _enderecosEntrega = value;
+    }
     public ICollection<Departamento>? Departamentos { get; set; }
 }
