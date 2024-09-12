@@ -1,5 +1,6 @@
 ﻿using eCommerce.API.Database;
 using eCommerce.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 var db = new eCommerceContext();
@@ -126,9 +127,22 @@ var db = new eCommerceContext();
 // }
 
 /* Select */
-var usuarios = db.Usuarios!.Select(a => new { Id = a.Id, Nome = a.Nome }).ToList();
+// var usuarios = db.Usuarios!.Select(a => new { Id = a.Id, Nome = a.Nome }).ToList(); // List<{Id, Nome}>
+//
+// foreach (var usuario in usuarios)
+// {
+//     Console.WriteLine($"({usuario.Id}) {usuario.Nome}");
+// }
 
-foreach (var usuario in usuarios)
-{
-    Console.WriteLine($"({usuario.Id}) {usuario.Nome}");
-}
+/* Executa Sql Raw - com retorno */
+// var nome = new SqlParameter("@nome", "Maurício Ribeiro");
+//
+// var usuarios = db.Usuarios!
+//     .FromSqlRaw("SELECT * FROM [Usuarios] WHERE Nome LIKE @nome ORDER BY Id", nome)
+//     .IgnoreAutoIncludes()
+//     .ToList();
+//
+// foreach (var usuario in usuarios)
+// {
+//     Console.WriteLine($"({usuario.Id}) {usuario.Nome}");
+// }
