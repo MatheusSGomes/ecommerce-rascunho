@@ -6,5 +6,5 @@ public class Contato
     public int UsuarioId { get; set; }
     public string? Telefone { get; set; }
     public string? Celular { get; set; }
-    public Usuario? Usuario { get; set; }
+    public virtual Usuario? Usuario { get; set; }
 }

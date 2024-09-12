@@ -12,5 +12,5 @@ public class EnderecoEntrega
     public string Endereco { get; set; } = null!;
     public string? Numero { get; set; }
     public string? Complemento { get; set; }
-    public Usuario? Usuario { get; set; }
+    public virtual Usuario? Usuario { get; set; }
 }

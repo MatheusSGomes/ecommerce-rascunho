@@ -8,6 +8,7 @@ public class eCommerceContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder
+            .UseLazyLoadingProxies()
             .UseSqlServer("Server=localhost,1433;Database=ecommerce;User ID=sa;Password=1q2w3e4r@#$;Encrypt=False;");
     }
 
