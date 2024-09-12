@@ -101,6 +101,6 @@ var db = new eCommerceContext();
 // }
 
 /* Lazy Loading com proxies */
-// var usuario = db.Usuarios!.Find(2);
-//
-// Console.WriteLine($"Nome: {usuario.Nome} - Endereço: {usuario.EnderecosEntrega?.Count}");
+var usuario = db.Usuarios!.Find(2);
+
+Console.WriteLine($"Nome: {usuario.Nome} - Endereço: {usuario.EnderecosEntrega?.Count}");
