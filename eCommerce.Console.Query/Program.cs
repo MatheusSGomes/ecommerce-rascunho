@@ -101,6 +101,14 @@ var db = new eCommerceContext();
 // }
 
 /* Lazy Loading com proxies */
-var usuario = db.Usuarios!.Find(2);
+// var usuario = db.Usuarios!.Find(2);
+//
+// Console.WriteLine($"Nome: {usuario.Nome} - Endereço: {usuario.EnderecosEntrega?.Count}");
 
-Console.WriteLine($"Nome: {usuario.Nome} - Endereço: {usuario.EnderecosEntrega?.Count}");
+
+/* Split Query - Consulta Dividida */
+// var usuario = db.Usuarios!
+//     .AsSplitQuery()
+//     .Include(u => u.EnderecosEntrega).FirstOrDefault(u => u.Id == 2);
+//
+// Console.WriteLine($"- Nome: {usuario!.Nome} - Endereços: {usuario.EnderecosEntrega?.Count}");
