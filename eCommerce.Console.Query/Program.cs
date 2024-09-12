@@ -112,3 +112,14 @@ var db = new eCommerceContext();
 //     .Include(u => u.EnderecosEntrega).FirstOrDefault(u => u.Id == 2);
 //
 // Console.WriteLine($"- Nome: {usuario!.Nome} - Endereços: {usuario.EnderecosEntrega?.Count}");
+
+/* Skip e Take */
+// var usuarios = db.Usuarios!
+//     .Skip(1)
+//     .Take(2)
+//     .ToList();
+//
+// foreach (var usuario in usuarios)
+// {
+//     Console.WriteLine($"-- {usuario.Nome}");
+// }
