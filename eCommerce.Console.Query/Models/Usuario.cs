@@ -1,13 +1,14 @@
+using eCommerce.API.Database.Utils;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace eCommerce.Models;
 
 public class Usuario
 {
-    private readonly ILazyLoader LazyLoader;
+    private readonly Action<object, string> LazyLoader;
     public Usuario() { }
 
-    public Usuario(ILazyLoader lazyLoader)
+    public Usuario(Action<object, string> lazyLoader)
     {
         LazyLoader = lazyLoader;
     }
