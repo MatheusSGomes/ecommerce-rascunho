@@ -1,4 +1,5 @@
 ﻿using eCommerce.API.Database;
+using eCommerce.Models;
 using Microsoft.EntityFrameworkCore;
 
 var db = new eCommerceContext();
@@ -123,3 +124,11 @@ var db = new eCommerceContext();
 // {
 //     Console.WriteLine($"-- {usuario.Nome}");
 // }
+
+/* Select */
+var usuarios = db.Usuarios!.Select(a => new { Id = a.Id, Nome = a.Nome }).ToList();
+
+foreach (var usuario in usuarios)
+{
+    Console.WriteLine($"({usuario.Id}) {usuario.Nome}");
+}
