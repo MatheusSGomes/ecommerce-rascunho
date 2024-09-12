@@ -65,10 +65,37 @@ var db = new eCommerceContext();
 //                          - Qtd. Departamentos: {contato.Usuario.Departamentos}");
 // }
 
-/* Autoinclude */
-var usuarios = db.Usuarios!.IgnoreAutoIncludes().ToList();
+/* Autoinclude e IgnoreAutoIncludes */
+// var usuarios = db.Usuarios!.IgnoreAutoIncludes().ToList();
+//
+// foreach (var usuario in usuarios)
+// {
+//     Console.WriteLine($"Nome: {usuario.Nome} - Telefone: {usuario.Contato?.Telefone}");
+// }
 
-foreach (var usuario in usuarios)
-{
-    Console.WriteLine($"Nome: {usuario.Nome} - Telefone: {usuario.Contato?.Telefone}");
-}
+/* Explicit Load */
+// var usuario = db.Usuarios!.IgnoreAutoIncludes().FirstOrDefault(usuario => usuario.Id == 2);
+//
+// Console.WriteLine($"Usuário: {usuario.Nome} - Contato: {usuario.Contato?.Telefone} - Endereços: {usuario.EnderecosEntrega?.Count}");
+// // Usuário: Maurício Ribeiro - Contato:  - Endereços: 
+//
+// db.Entry(usuario).Reference(a => a.Contato).Load();
+//
+// Console.WriteLine($"Usuário: {usuario.Nome} - Contato: {usuario.Contato?.Telefone} - Endereços: {usuario.EnderecosEntrega?.Count}");
+// // Usuário: Maurício Ribeiro - Contato: (11) 986520-8484 - Endereços:
+//
+// db.Entry(usuario).Collection(a => a.EnderecosEntrega!).Load();
+//
+// Console.WriteLine($"Usuário: {usuario.Nome} - Contato: {usuario.Contato?.Telefone} - Endereços: {usuario.EnderecosEntrega?.Count}");
+// // Usuário: Maurício Ribeiro - Contato: (11) 986520-8484 - Endereços: 2
+//
+// var enderecos = db.Entry(usuario)
+//     .Collection(a => a.EnderecosEntrega!)
+//     .Query()
+//     .Where(a => a.Estado == "SP")
+//     .ToList();
+//
+// foreach (var endereco in enderecos)
+// {
+//     Console.WriteLine($"{endereco.NomeEndereco}");
+// }
