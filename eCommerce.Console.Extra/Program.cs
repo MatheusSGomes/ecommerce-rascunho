@@ -67,3 +67,19 @@ var db = new eCommerceContext();
 // {
 //     Console.WriteLine($"({usuario.Id}) {usuario.Nome} - Mãe: {usuario.NomeMae} - Situação: {usuario.SituacaoCadastro}");
 // }
+
+/* TemporalFromTo / TemporalBetween */
+
+// var From = new DateTime(2024, 8, 13, 11, 34, 00);
+// var To = new DateTime(2024, 8, 13, 12, 34, 00);
+//
+// var usuarioTemp = db.Usuarios!
+//     .TemporalFromTo(From, To)
+//     .Where(a => a.Id == 2)
+//     .OrderBy(a => EF.Property<DateTime>(a, "PeriodoInicial"))
+//     .ToList();
+//
+// foreach (var usuario in usuarioTemp)
+// {
+//     Console.WriteLine($"({usuario.Id}) {usuario.Nome} - Mãe: {usuario.NomeMae} - Situação: {usuario.SituacaoCadastro}");
+// }
