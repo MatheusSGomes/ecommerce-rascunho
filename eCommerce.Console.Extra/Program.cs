@@ -1,4 +1,5 @@
-﻿using eCommerce.API.Database;
+﻿using Dapper;
+using eCommerce.API.Database;
 using eCommerce.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -83,3 +84,12 @@ var db = new eCommerceContext();
 // {
 //     Console.WriteLine($"({usuario.Id}) {usuario.Nome} - Mãe: {usuario.NomeMae} - Situação: {usuario.SituacaoCadastro}");
 // }
+
+/* Dapper */
+var connection = db.Database.GetDbConnection();
+var usuarios = connection.Query<Usuario>("SELECT * FROM [Usuarios]");
+
+foreach (var usuario in usuarios)
+{
+    Console.WriteLine($"{usuario.Nome}");
+}
