@@ -1,5 +1,6 @@
 ﻿using eCommerce.API.Database;
 using eCommerce.Models;
+using Microsoft.EntityFrameworkCore;
 
 var db = new eCommerceContext();
 
@@ -39,3 +40,15 @@ var db = new eCommerceContext();
 // {
 //     Console.WriteLine($"({usuario.Id}) {usuario.Nome} - {usuario.NomeMae} - {usuario.SituacaoCadastro}");
 // }
+
+/* TemporalAll */
+var usuarioTemp = db.Usuarios!
+    .TemporalAll()
+    .Where(a => a.Id == 2)
+    .OrderBy(a => EF.Property<DateTime>(a, "PeriodoInicial"))
+    .ToList();
+
+foreach (var usuario in usuarioTemp)
+{
+    Console.WriteLine($"({usuario.Id}) {usuario.Nome} - Mãe: {usuario.NomeMae} - Situação: {usuario.SituacaoCadastro}");
+}
