@@ -42,13 +42,28 @@ var db = new eCommerceContext();
 // }
 
 /* TemporalAll */
-var usuarioTemp = db.Usuarios!
-    .TemporalAll()
-    .Where(a => a.Id == 2)
-    .OrderBy(a => EF.Property<DateTime>(a, "PeriodoInicial"))
-    .ToList();
+// var usuarioTemp = db.Usuarios!
+//     .TemporalAll()
+//     .Where(a => a.Id == 2)
+//     .OrderBy(a => EF.Property<DateTime>(a, "PeriodoInicial"))
+//     .ToList();
+//
+// foreach (var usuario in usuarioTemp)
+// {
+//     Console.WriteLine($"({usuario.Id}) {usuario.Nome} - Mãe: {usuario.NomeMae} - Situação: {usuario.SituacaoCadastro}");
+// }
 
-foreach (var usuario in usuarioTemp)
-{
-    Console.WriteLine($"({usuario.Id}) {usuario.Nome} - Mãe: {usuario.NomeMae} - Situação: {usuario.SituacaoCadastro}");
-}
+/* TemporalAsOf */
+
+// var AsOf = new DateTime(2024, 8, 13, 11, 34, 00);
+//
+// var usuarioTemp = db.Usuarios!
+//     .TemporalAsOf(AsOf)
+//     .Where(a => a.Id == 2)
+//     // .OrderBy(a => EF.Property<DateTime>(a, "PeriodoInicial"))
+//     .ToList();
+//
+// foreach (var usuario in usuarioTemp)
+// {
+//     Console.WriteLine($"({usuario.Id}) {usuario.Nome} - Mãe: {usuario.NomeMae} - Situação: {usuario.SituacaoCadastro}");
+// }
