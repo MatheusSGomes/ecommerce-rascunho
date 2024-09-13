@@ -9,7 +9,7 @@ public class Usuario
     public string? RG { get; set; }
     public string CPF { get; set; } = null!;
     public string? NomeMae { get; set; }
-    public string? SituacaoCadastro { get; set; }
+    public string? SituacaoCadastro { get; set; } // A = Ativo, I = Inativo (posso usar um enum)
     public DateTimeOffset DataCadastro { get; set; }
 
     public Contato? Contato { get; set; }
